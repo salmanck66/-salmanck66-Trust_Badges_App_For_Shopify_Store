@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MDB_CSTRING") // Use your MongoDB connection string here
+}
+
+model Session {
+  id            String    @id @map("_id") @default(auto()) @db.ObjectId // Use ObjectId for MongoDB
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+model TrustBadge {
+  id    String @id @map("_id") @default(auto()) @db.ObjectId // Use ObjectId for MongoDB
+  name  String
+  image String
+}
